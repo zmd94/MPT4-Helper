@@ -13,7 +13,7 @@ Projek ini ialah permulaan kod sebenar yang boleh dimuatkan sebagai **unpacked e
 3. Hidupkan **Developer mode**.
 4. Klik **Load unpacked** dan pilih folder `mpt4-helper` (folder yang mengandungi `manifest.json`).
 5. Buka tab laman peperiksaan yang telah dilog masuk.
-6. Klik ikon MPT4 Helper, pilih subjek, pilih fail XLSX/CSV, kemudian klik **AKTIFKAN MPT4 HELPER**.
+6. Klik ikon MPT4 Helper, pilih subjek, pilih fail XLSX, kemudian klik **MULA MENGISI**.
 7. Panel terapung akan muncul. Semak preview dan status DOM.
 
 ## Header fail
@@ -26,8 +26,6 @@ Projek ini ialah permulaan kod sebenar yang boleh dimuatkan sebagai **unpacked e
 ## Had versi ini
 - XLSX reader tempatan menyokong format `.xlsx` ZIP/DEFLATE biasa. `.xls` lama belum disokong.
 - Google Sheets import menggunakan CSV export awam; fail peribadi/terhad akan ditolak.
-- Import awal menyemak kewujudan header tepat; pemetaan manual dan pengesanan subject mismatch penuh belum siap.
-- Tiada auto-fill dilaksanakan lagi. DOM laman sebenar perlu diperiksa dahulu. Jangan gunakan sebarang kod yang mengisi medan berdasarkan tekaan.
 - Tiada fungsi Simpan/Submit dan tiada panggilan API untuk menyimpan markah.
 
 ## Ujian unit
