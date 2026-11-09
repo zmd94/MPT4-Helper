@@ -26,7 +26,7 @@ Projek ini ialah permulaan kod sebenar yang boleh dimuatkan sebagai **unpacked e
 ## Had versi ini
 - XLSX reader tempatan menyokong format `.xlsx` ZIP/DEFLATE biasa. `.xls` lama belum disokong.
 - Google Sheets import menggunakan CSV export awam; fail peribadi/terhad akan ditolak.
-- Tiada fungsi Simpan/Submit dan tiada panggilan API untuk menyimpan markah.
+- Tiada fungsi simpan dan tiada panggilan API untuk menyimpan markah.
 
 ## Ujian unit
 Dengan Node.js 18+:
