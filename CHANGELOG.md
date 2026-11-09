@@ -150,3 +150,20 @@ Nota: Chrome lazimnya menutup popup extension apabila interaksi beralih ke tab; 
 - Contohnya, `Bahagian A (Soalan 1 - 6)` kini dibandingkan setara dengan `Bahagian A (Soalan 1-6)`.
 - Pembetulan ini membantu pengesanan label komponen Matematik tanpa mengubah nama komponen atau had markah.
 - Profil keempat-empat mata pelajaran telah diuji dan disahkan berfungsi oleh pengguna.
+
+## v0.11.0
+- Menambah Data Validation pada empat template Excel: integer 0 hingga had komponen, huruf besar `T` atau sel kosong sahaja.
+- Menambah Conditional Formatting untuk menandakan nilai markah tidak sah, termasuk nilai yang dimasukkan melalui salin dan tampal.
+- Menambah pengesahan wajib semua sel markah dalam fail XLSX, CSV dan Google Sheets sebelum sesi extension diaktifkan.
+- Jika terdapat format markah salah atau markah di luar julat, extension memaparkan lokasi kesalahan dan mengunci pengaktifan/Autofill sehingga fail dibetulkan.
+- Profil had markah kekal berdasarkan empat mata pelajaran yang telah disahkan.
+
+## v0.11.1
+- Membetulkan warna Conditional Formatting dalam empat template Excel menggunakan nilai ARGB legap yang serasi dengan Excel.
+- Mengekalkan peraturan Data Validation dan had markah bagi semua komponen.
+- Tiada perubahan pada logik pengesahan markah atau proses Autofill.
+
+## v0.11.2
+- Membetulkan semua warna dalam senarai differential styles (`dxfs`) template Excel, termasuk format lama yang tidak lagi digunakan tetapi masih tersimpan dalam fail.
+- Mengelakkan nilai alpha `00` pada warna differential formatting yang boleh menyebabkan Excel membuang Conditional Formatting semasa proses Repair.
+- Mengekalkan Data Validation, formula penandaan kesalahan dan logik pengesahan wajib extension.
