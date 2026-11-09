@@ -1,6 +1,6 @@
 # MPT4 Helper — Chrome Extension (Manifest V3)
 
-Projek ini ialah permulaan kod sebenar yang boleh dimuatkan sebagai **unpacked extension** dalam Chrome. Ia belum mempunyai adapter khusus untuk laman peperiksaan kerana HTML/DOM sebenar belum diberikan. Oleh itu butang AUTOFILL sengaja dikunci; extension tidak mengubah sebarang markah sehingga pemetaan DOM disahkan.
+Pembantu pengisian markah peperiksaan secara setempat dengan semakan dan pengesahan guru.
 
 ## Keperluan
 - Windows 10/11 dan Google Chrome terkini.
