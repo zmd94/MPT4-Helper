@@ -1,6 +1,7 @@
 import { parseCSV, rowsToObjects } from './modules/csv.js';
 import { readXLSX } from './modules/xlsx-lite.js';
 import { PROFILES, headersFor } from './modules/profiles.js';
+import { validateMarkRows } from './modules/validation.js';
 const $=id=>document.getElementById(id); let imported=null, selectedRows=null;
 function status(s){$('status').textContent=s;}
 
@@ -60,6 +61,20 @@ $('file').addEventListener('change',async e=>{
     imported={fileName:file.name,sheets:{[firstName]:sheets[firstName]}}; validateReady();
   } catch(err){status('Ralat: '+err.message);}
 });
+
+function validateAllMarks(rows, code){
+  const components = PROFILES[code]?.components || [];
+  const result = validateMarkRows(rows, components);
+  if(!result.ok){
+    const lines = result.errors.slice(0,8).map(e =>
+      `Baris ${e.row} · ${e.studentName || e.studentId || 'Murid tidak dikenal'} · ${e.component}: "${e.value}" — ${e.message}`
+    );
+    const more = result.errors.length > 8 ? `\nDan ${result.errors.length-8} kesalahan lain.` : '';
+    throw new Error(`PENGESAHAN MARKAH GAGAL: ${result.errors.length} kesalahan ditemui.\n${lines.join('\n')}${more}\nBetulkan fail sumber sebelum meneruskan. Autofill dikunci.`);
+  }
+  return result;
+}
+
 function validateImportedRows(rawRows, code){
   const headers=(rawRows[0]||[]).map(v=>String(v??'').trim());
   const normalized=headers.map(h=>h.toLowerCase().replace(/\s+/g,' ').trim());
@@ -84,9 +99,10 @@ function validateReady(){
    const name=Object.keys(imported?.sheets||{})[0];
    const rawRows=imported.sheets[name];
    const rows=validateImportedRows(rawRows,code);
+   const markCheck=validateAllMarks(rows,code);
    selectedRows=rows;
    $('activate').disabled=false;
-   status(`${rows.length} baris dibaca · ${PROFILES[code].name}. Header asas ditemui.`);
+   status(`${rows.length} baris dibaca · ${PROFILES[code].name}. Semua markah sah (${markCheck.checked} sel diperiksa).`);
  }catch(err){$('activate').disabled=true;status(err.message);}
 }
 $('activate').addEventListener('click',async()=>{
@@ -97,11 +113,13 @@ $('activate').addEventListener('click',async()=>{
   const sheetUrl=$('sheetUrl').value.trim();
   if(sheetUrl){
     imported=await readGoogleSheet(sheetUrl);
-    validateImportedRows(imported.sheets['Worksheet pertama'],code);
+    const sheetRows=validateImportedRows(imported.sheets['Worksheet pertama'],code);
+    const markCheck=validateAllMarks(sheetRows,code);
   }
   if(!imported) throw new Error('Pilih fail Excel/CSV atau masukkan URL Google Sheets yang sah.');
   const sheetName=Object.keys(imported.sheets)[0];
   const rows=rowsToObjects(imported.sheets[sheetName]);
+  validateAllMarks(rows,code);
   const headers=Object.keys(rows[0]||{}).filter(h=>h!=='__row');
   const headerMap=new Map(headers.map(h=>[h.toLowerCase().replace(/\s+/g,' ').trim(),h]));
   const canonicalRows=rows.map(row=>{

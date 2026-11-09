@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MPT4 Helper",
-  "version": "0.10.4",
+  "version": "0.11.3",
   "description": "Pembantu pengisian markah peperiksaan secara setempat dengan semakan dan pengesahan guru.",
   "permissions": [
     "activeTab",
